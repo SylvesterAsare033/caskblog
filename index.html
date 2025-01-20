@@ -102,9 +102,9 @@
 <body>
     <header class="header">
         <div class="date-weather">
-            <p>Saturday, 2 November</p>
+            <p id="current-date"></p>
             <div class="weather">
-                <i class="fas fa-sun weather-icon"></i>
+                <i class="fas fa-sun weather-icon" id="weather-icon"></i>
                 <div class="weather-info">
                     <div class="readerr" style="display: flex; flex-direction: row;">
                         <p id="current-weather" class="temp">00°C</p>
@@ -113,6 +113,42 @@
                 </div>
             </div>
         </div>
+        
+        <script>
+          // Function to format and display the current date
+          function displayDate() {
+              const date = new Date();
+              const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+              document.getElementById('current-date').textContent = date.toLocaleDateString('en-US', options);
+          }
+        
+          async function getWeather() {
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=Accra&units=metric&appid=31e6be1b41ead9a7cfb3933ff376cd50`;
+
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+
+        const temperature = data.main.temp;
+        const iconCode = data.weather[0].icon;
+        const weatherIcon = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
+
+        // Update the weather information
+        document.getElementById('current-weather').textContent = `${temperature}°C`;
+        document.getElementById('weather-icon').src = weatherIcon;
+    } catch (error) {
+        console.error('Error fetching weather data:', error);
+    }
+}
+
+        
+          // Call the functions on page load
+          window.onload = function() {
+              displayDate();
+              getWeather();
+          }
+        </script>
+        
         <nav class="navbar" id="nnv">
             <ul>
                 <li><a href="#" class="active">Home</a></li>
@@ -159,12 +195,12 @@
         const apiKey = "pub_5845288622d66f260848c1d1d3cadeea66ef5";
         const categories = {
             ghana: "Ghana",
-            technology: "Technology",
+            // technology: "Technology",
             trending: "Trending"
         };
 
         async function fetchCategoryNews(category, elementId) {
-            const url = `https://newsdata.io/api/1/news?apikey=${apiKey}&q=${category}`;
+            const url = `https://newsdata.io/api/1/news?apikey=pub_5845288622d66f260848c1d1d3cadeea66ef5&q=ghana&country=gh&language=en `;
             try {
                 const response = await fetch(url);
                 const data = await response.json();
