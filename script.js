@@ -36,7 +36,7 @@ async function fetchCategoryNews(category, elementId) {
 }
 
 async function fetchTopStories() {
-    const url = `https://newsdata.io/api/1/news?apikey=${apiKey}&q=ghana&language=en`;
+    const url = `https://newsdata.io/api/1/news?apikey=pub_5845288622d66f260848c1d1d3cadeea66ef5&country=gh&language=en&category=education,politics `;
     const response = await fetch(url);
     const data = await response.json();
     const mainStoryContainer = document.getElementById("main-story");
@@ -80,3 +80,33 @@ fetchCategoryNews(categories.world, "world-category");
 fetchCategoryNews(categories.sports, "sports-category");
 fetchCategoryNews(categories.technology, "technology-category");
 fetchTopStories();
+
+
+function displayDate() {
+    const date = new Date();
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    document.getElementById('current-date').textContent = date.toLocaleDateString('en-US', options);
+}
+
+async function getWeather() {
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=Accra&units=metric&appid=31e6be1b41ead9a7cfb3933ff376cd50`;
+
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+
+        const temperature = data.main.temp;
+        const iconCode = data.weather[0].icon;
+        const weatherIcon = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
+
+        document.getElementById('current-weather').textContent = `${temperature}°C`;
+        document.getElementById('weather-icon').src = weatherIcon;
+    } catch (error) {
+        console.error('Error fetching weather data:', error);
+    }
+}
+
+window.onload = function() {
+    displayDate();
+    getWeather();
+}

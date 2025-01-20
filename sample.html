@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google News Style Blog</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Reset and Font */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #202124;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: #1a73e8;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Header */
+        .header {
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header .date-weather {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            gap: 15px;
+        }
+
+        .navbar ul li {
+            display: inline;
+        }
+
+        .navbar ul li a {
+            font-weight: 600;
+            padding: 5px 10px;
+            color: #5f6368;
+        }
+
+        .navbar ul li a.active {
+            color: #1a73e8;
+            border-bottom: 2px solid #1a73e8;
+        }
+
+        /* News Container */
+        .news-container {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 20px;
+            gap: 20px;
+        }
+
+        .top-stories, .category-section {
+            flex: 1 1 100%;
+        }
+
+        /* Cards */
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+
+        .card img {
+            width: 100%;
+            border-radius: 4px;
+        }
+
+        .card h2, .card h3 {
+            font-size: 18px;
+            color: #202124;
+            margin-bottom: 8px;
+        }
+
+        .card p {
+            color: #5f6368;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .card .source {
+            font-weight: 600;
+            font-size: 12px;
+            color: #70757a;
+        }
+
+        /* Section Headers */
+        .section-header {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .news-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="date-weather">
+            <p id="current-date">January 20, 2025</p>
+            <div class="weather">
+                <i class="fas fa-sun weather-icon" id="weather-icon"></i>
+                <span id="current-weather">00°C</span>
+            </div>
+        </div>
+        <nav class="navbar">
+            <ul>
+                <li><a href="#" class="active">Home</a></li>
+                <li><a href="#">For You</a></li>
+                <li><a href="#">Following</a></li>
+                <li><a href="#">World</a></li>
+                <li><a href="#">Technology</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="news-container">
+        <section class="top-stories">
+            <h2 class="section-header">Top Stories</h2>
+            <div class="card">
+                <img src="https://via.placeholder.com/600" alt="Top Story">
+                <h3>Top Story Title</h3>
+                <p>Short description of the top story...</p>
+                <span class="source">Source Name</span>
+            </div>
+        </section>
+
+        <section class="category-section">
+            <h2 class="section-header">Technology</h2>
+            <div class="card">
+                <h3>Technology News</h3>
+                <p>Short description of the news...</p>
+                <span class="source">Source Name</span>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

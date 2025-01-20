@@ -7,98 +7,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
     <meta name="description" content="Blog page for CASK team">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Poppins&display=swap');
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Nunito', sans-serif;
-        }
-
-        .category-section {
-            display: flex;
-            gap: 20px;
-            padding: 20px;
-            background-color: #f8f9fa;
-            flex-wrap: wrap;
-        }
-
-        .category-card {
-            background-color: #fff;
-            border-radius: 8px;
-            padding: 16px;
-            width: 100%;
-            max-width: 320px;
-            flex: 1 1 calc(33.333% - 20px);
-        }
-
-        .category-card h2 {
-            font-size: 18px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: #333;
-        }
-
-        .news-item {
-            display: flex;
-            gap: 10px;
-            margin: 12px 0;
-        }
-
-        .news-item img {
-            width: 50px;
-            height: 50px;
-            border-radius: 4px;
-        }
-
-        .news-content {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .source {
-            font-weight: bold;
-            color: #555;
-            font-size: 14px;
-        }
-
-        .time {
-            font-size: 12px;
-            color: #888;
-        }
-
-        @media (max-width: 768px) {
-            .category-section {
-                gap: 10px;
-                padding: 10px;
-            }
-            .category-card {
-                max-width: 100%;
-                flex: 1 1 100%;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .category-section {
-                padding: 5px;
-                flex-direction: column;
-            }
-            .news-item {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .news-item img {
-                width: 40px;
-                height: 40px;
-            }
-            .time {
-                font-size: 10px;
-            }
-        }
-    </style>
 </head>
 <body>
     <header class="header">
@@ -115,37 +23,6 @@
             </div>
         </div>
         
-        <script>
-          function displayDate() {
-              const date = new Date();
-              const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-              document.getElementById('current-date').textContent = date.toLocaleDateString('en-US', options);
-          }
-
-          async function getWeather() {
-              const url = `https://api.openweathermap.org/data/2.5/weather?q=Accra&units=metric&appid=31e6be1b41ead9a7cfb3933ff376cd50`;
-
-              try {
-                  const response = await fetch(url);
-                  const data = await response.json();
-
-                  const temperature = data.main.temp;
-                  const iconCode = data.weather[0].icon;
-                  const weatherIcon = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
-
-                  document.getElementById('current-weather').textContent = `${temperature}°C`;
-                  document.getElementById('weather-icon').src = weatherIcon;
-              } catch (error) {
-                  console.error('Error fetching weather data:', error);
-              }
-          }
-
-          window.onload = function() {
-              displayDate();
-              getWeather();
-          }
-        </script>
-
         <nav class="navbar" id="nnv">
             <ul>
                 <li><a href="#" class="active">Home</a></li>
