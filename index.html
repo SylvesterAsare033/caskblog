@@ -195,12 +195,12 @@
         const apiKey = "pub_5845288622d66f260848c1d1d3cadeea66ef5";
         const categories = {
             ghana: "Ghana",
-            // technology: "Technology",
+            technology: "Technology",
             trending: "Trending"
         };
 
         async function fetchCategoryNews(category, elementId) {
-            const url = `https://newsdata.io/api/1/news?apikey=pub_5845288622d66f260848c1d1d3cadeea66ef5&q=ghana&country=gh&language=en `;
+            // const url = `https://newsdata.io/api/1/news?apikey=pub_5845288622d66f260848c1d1d3cadeea66ef5&q=ghana&country=gh&language=en `;
             try {
                 const response = await fetch(url);
                 const data = await response.json();
@@ -229,7 +229,7 @@
         fetchCategoryNews(categories.trending, "trending-category");
 
         async function fetchTopStories() {
-            const url = `https://newsdata.io/api/1/news?apikey=${apiKey}&q=elections`;
+            const url = `https://newsdata.io/api/1/news?apikey=pub_5845288622d66f260848c1d1d3cadeea66ef5&q=USA&country=us&language=en&category=top `;
             const response = await fetch(url);
             const data = await response.json();
             const mainStoryContainer = document.getElementById("main-story");
@@ -264,7 +264,7 @@
         }
 
         async function fetchTrendingPicks() {
-            const url = `https://newsdata.io/api/1/news?apikey=${apiKey}&q=trending`;
+            const url = `https://newsdata.io/api/1/news?apikey=pub_5845288622d66f260848c1d1d3cadeea66ef5&q=USA&country=us&language=en&category=politics,sports,top `;
             const response = await fetch(url);
             const data = await response.json();
             const picksContainer = document.getElementById("picks-container");
