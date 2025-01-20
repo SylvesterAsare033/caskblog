@@ -1,48 +1,11 @@
-const slider = document.querySelector('.slider');
-const slides = document.querySelectorAll('.slide');
-const interval = 3000;
-
-let currentSlide = 0;
-
-function showSlide() {
-    slides[currentSlide].classList.add('active');
-}
-
-function hideSlide() {
-    slides[currentSlide].classList.remove('active');
-}
-
-function nextSlide() {
-    hideSlide();
-    currentSlide = (currentSlide + 1) % slides.length;
-    showSlide();
-}
-
-function prevSlide() {
-    hideSlide();
-    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-    showSlide();
-}
-
-showSlide();
-
-setInterval(nextSlide, interval);
-
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowRight') {
-        nextSlide();
-    } else if (e.key === 'ArrowLeft') {
-        prevSlide();
-    }
-});
 
 
 const apiKey = "pub_5845288622d66f260848c1d1d3cadeea66ef5";
 const categories = {
-    entertainment: "Entertainment",
+    entertainment: "World",
     ghana: "Ghana",
     sports: "Sports",
-    world: "World",
+    world: "Entertainment",
     technology: "Technology"
 };
 
@@ -113,7 +76,7 @@ async function fetchTopStories() {
 // Fetch news for each category
 fetchCategoryNews(categories.entertainment, "ghana-category"); // Entertainment in Ghana's div
 fetchCategoryNews(categories.ghana, "entertainment-category"); // Ghana in Entertainment's div
-fetchCategoryNews(categories.sports, "sports-category");
 fetchCategoryNews(categories.world, "world-category");
+fetchCategoryNews(categories.sports, "sports-category");
 fetchCategoryNews(categories.technology, "technology-category");
 fetchTopStories();
