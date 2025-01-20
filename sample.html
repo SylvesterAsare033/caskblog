@@ -6,6 +6,9 @@
     <title>Google News Style Blog</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
     <style>
         /* General Reset and Font */
         * {
@@ -149,13 +152,11 @@
     <main class="news-container">
         <section class="top-stories">
             <h2 class="section-header">Top Stories</h2>
-            <div class="card">
-                <img src="https://via.placeholder.com/600" alt="Top Story">
-                <h3>Top Story Title</h3>
-                <p>Short description of the top story...</p>
-                <span class="source">Source Name</span>
+            <div class="slider" id="top-stories-slider">
+                <!-- News articles will be injected here -->
             </div>
         </section>
+        
 
         <section class="category-section">
             <h2 class="section-header">Technology</h2>
@@ -166,5 +167,54 @@
             </div>
         </section>
     </main>
+
+    <script>
+        const apiKey = 'a25c84abf76740bd9e32ca7fee96498c'; // Replace with your API key
+        const topStoriesSlider = document.getElementById('top-stories-slider');
+    
+        // Fetch news from API
+        async function fetchNews() {
+            try {
+                const response = await fetch(`https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`);
+                const data = await response.json();
+                if (data.articles) {
+                    displayTopStories(data.articles);
+                } else {
+                    console.error('No articles found.');
+                }
+            } catch (error) {
+                console.error('Error fetching news:', error);
+            }
+        }
+    
+        // Display Top Stories in the Slider
+        function displayTopStories(articles) {
+            topStoriesSlider.innerHTML = ''; // Clear existing content
+            articles.forEach((article, index) => {
+                const slide = document.createElement('div');
+                slide.classList.add('slide');
+                slide.innerHTML = `
+                    <img src="${article.urlToImage || 'https://via.placeholder.com/600'}" alt="${article.title}">
+                    <h3>${article.title}</h3>
+                    <p>${article.description || 'No description available.'}</p>
+                    <a href="${article.url}" target="_blank">Read more</a>
+                    <span class="source">${article.source.name}</span>
+                `;
+                topStoriesSlider.appendChild(slide);
+            });
+    
+            // Initialize the slider (using Swiper.js as an example)
+            new Swiper('.slider', {
+                loop: true,
+                autoplay: { delay: 5000 },
+                navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+                pagination: { el: '.swiper-pagination', clickable: true },
+            });
+        }
+    
+        // Initialize
+        fetchNews();
+    </script>
+    
 </body>
 </html>
