@@ -10,12 +10,13 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Poppins&display=swap');
 
-        *{
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Nunito', sans-serif;
         }
+
         .category-section {
             display: flex;
             gap: 20px;
@@ -30,7 +31,7 @@
             padding: 16px;
             width: 100%;
             max-width: 320px;
-            flex: 1 1 calc(33.333% - 20px); /* 3 columns */
+            flex: 1 1 calc(33.333% - 20px);
         }
 
         .category-card h2 {
@@ -115,40 +116,36 @@
         </div>
         
         <script>
-          // Function to format and display the current date
           function displayDate() {
               const date = new Date();
               const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
               document.getElementById('current-date').textContent = date.toLocaleDateString('en-US', options);
           }
-        
+
           async function getWeather() {
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=Accra&units=metric&appid=31e6be1b41ead9a7cfb3933ff376cd50`;
+              const url = `https://api.openweathermap.org/data/2.5/weather?q=Accra&units=metric&appid=31e6be1b41ead9a7cfb3933ff376cd50`;
 
-    try {
-        const response = await fetch(url);
-        const data = await response.json();
+              try {
+                  const response = await fetch(url);
+                  const data = await response.json();
 
-        const temperature = data.main.temp;
-        const iconCode = data.weather[0].icon;
-        const weatherIcon = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
+                  const temperature = data.main.temp;
+                  const iconCode = data.weather[0].icon;
+                  const weatherIcon = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
 
-        // Update the weather information
-        document.getElementById('current-weather').textContent = `${temperature}°C`;
-        document.getElementById('weather-icon').src = weatherIcon;
-    } catch (error) {
-        console.error('Error fetching weather data:', error);
-    }
-}
+                  document.getElementById('current-weather').textContent = `${temperature}°C`;
+                  document.getElementById('weather-icon').src = weatherIcon;
+              } catch (error) {
+                  console.error('Error fetching weather data:', error);
+              }
+          }
 
-        
-          // Call the functions on page load
           window.onload = function() {
               displayDate();
               getWeather();
           }
         </script>
-        
+
         <nav class="navbar" id="nnv">
             <ul>
                 <li><a href="#" class="active">Home</a></li>
@@ -159,135 +156,44 @@
             </ul>
         </nav>
     </header>
-    
+
     <main class="news-container">
         <section class="top-stories">
-            <h2>Top stories on Elections</h2>
+            <h2> Ghana</h2>
             <div id="main-story" class="main-story"></div>
             <div id="sub-stories" class="sub-stories"></div>
         </section>
-    
+
         <aside class="picks-for-you">
             <h2>Trending News</h2>
             <div id="picks-container"></div>
         </aside>
     </main>
-    
+
     <div class="category-section">
-        <div id="ghana-category" class="category-card">
-            <h2>Ghana <i class="fas fa-chevron-right"></i></h2>
-            <hr class="smhr">
-            <div class="news-items"></div>
-        </div>
         <div id="technology-category" class="category-card">
             <h2>Technology <i class="fas fa-chevron-right"></i></h2>
             <hr class="smhr">
             <div class="news-items"></div>
         </div>
-        <div id="trending-category" class="category-card">
-            <h2>Trending <i class="fas fa-chevron-right"></i></h2>
+        <div id="ghana-category" class="category-card">
+            <h2> Entertainment<i class="fas fa-chevron-right"></i></h2>
+            <hr class="smhr">
+            <div class="news-items"></div>
+        </div>
+        <div id="sports-category" class="category-card">
+            <h2>Sports <i class="fas fa-chevron-right"></i></h2>
+            <hr class="smhr">
+            <div class="news-items"></div>
+        </div>
+        <div id="world-category" class="category-card">
+            <h2>World <i class="fas fa-chevron-right"></i></h2>
             <hr class="smhr">
             <div class="news-items"></div>
         </div>
     </div>
 
-    <script>
-        const apiKey = "pub_5845288622d66f260848c1d1d3cadeea66ef5";
-        const categories = {
-            ghana: "Ghana",
-            technology: "Technology",
-            trending: "Trending"
-        };
 
-        async function fetchCategoryNews(category, elementId) {
-            // const url = `https://newsdata.io/api/1/news?apikey=pub_5845288622d66f260848c1d1d3cadeea66ef5&q=ghana&country=gh&language=en `;
-            try {
-                const response = await fetch(url);
-                const data = await response.json();
-                const newsContainer = document.getElementById(elementId).querySelector(".news-items");
-
-                data.results.slice(0, 3).forEach(article => {
-                    const newsItem = document.createElement("div");
-                    newsItem.classList.add("news-item");
-                    newsItem.innerHTML = `
-                        <img src="${article.image_url || 'https://via.placeholder.com/50'}" alt="News Thumbnail">
-                        <div class="news-content">
-                            <p class="source">${article.source_id}</p>
-                            <p>${article.title}</p>
-                            <p class="time">${new Date(article.pubDate).toLocaleDateString()}</p>
-                        </div>
-                    `;
-                    newsContainer.appendChild(newsItem);
-                });
-            } catch (error) {
-                console.error(`Error fetching news for ${category}:`, error);
-            }
-        }
-
-        fetchCategoryNews(categories.ghana, "ghana-category");
-        fetchCategoryNews(categories.technology, "technology-category");
-        fetchCategoryNews(categories.trending, "trending-category");
-
-        async function fetchTopStories() {
-            const url = `https://newsdata.io/api/1/news?apikey=pub_5845288622d66f260848c1d1d3cadeea66ef5&q=USA&country=us&language=en&category=top `;
-            const response = await fetch(url);
-            const data = await response.json();
-            const mainStoryContainer = document.getElementById("main-story");
-            const subStoriesContainer = document.getElementById("sub-stories");
-
-            if (data.results) {
-                const [mainStory, ...subStories] = data.results;
-
-                mainStoryContainer.innerHTML = `
-                    <img src="${mainStory.image_url || 'https://via.placeholder.com/150'}" alt="Main Story Image">
-                    <div class="main-story-content">
-                        <p class="source">${mainStory.source_id}</p>
-                        <h3>${mainStory.title}</h3>
-                        <p class="time">${new Date(mainStory.pubDate).toLocaleString()}</p>
-                    </div>
-                `;
-
-                subStories.slice(0, 3).forEach(story => {
-                    const subStory = document.createElement("div");
-                    subStory.classList.add("sub-story");
-                    subStory.innerHTML = `
-                        <img src="${story.image_url || 'https://via.placeholder.com/50'}" alt="Story Thumbnail" class="outlet-logo">
-                        <div>
-                            <p class="source">${story.source_id}</p>
-                            <p>${story.title}</p>
-                            <p class="time">${new Date(story.pubDate).toLocaleString()}</p>
-                        </div>
-                    `;
-                    subStoriesContainer.appendChild(subStory);
-                });
-            }
-        }
-
-        async function fetchTrendingPicks() {
-            const url = `https://newsdata.io/api/1/news?apikey=pub_5845288622d66f260848c1d1d3cadeea66ef5&q=USA&country=us&language=en&category=politics,sports,top `;
-            const response = await fetch(url);
-            const data = await response.json();
-            const picksContainer = document.getElementById("picks-container");
-
-            if (data.results) {
-                data.results.slice(0, 3).forEach(pick => {
-                    const pickItem = document.createElement("div");
-                    pickItem.classList.add("pick");
-                    pickItem.innerHTML = `
-                        <img src="${pick.image_url || 'https://via.placeholder.com/50'}" alt="Pick Image">
-                        <div class="pick-content">
-                            <p class="source">${pick.source_id}</p>
-                            <p>${pick.title}</p>
-                            <p class="time">${new Date(pick.pubDate).toLocaleString()}</p>
-                        </div>
-                    `;
-                    picksContainer.appendChild(pickItem);
-                });
-            }
-        }
-
-        fetchTopStories();
-        fetchTrendingPicks();
-    </script>
+    
 </body>
 </html>
